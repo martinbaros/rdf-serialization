@@ -1,0 +1,861 @@
+{
+  "@context": [
+    "http://www.w3.org/ns/csvw",
+    {
+      "@language": "en"
+    }
+  ],
+  "@type": "TableGroup",
+  "@id": "https://examplezoo.com/data.csv-metadata.json",
+  "dc:description": "Example ZOO",
+  "tables": [
+    {
+      "@id": "https://examplezoo.com/data-1.csv-metadata.json",
+      "@type": "Table",
+      "url": "data-1.csv",
+      
+      "tableSchema": {
+        "@type": "Schema",
+        "aboutUrl":"{+uri}",
+        "columns": [
+          {
+            "@type": "Column",
+            "name": "uri",
+            "titles": "uri",
+            "dc:description": "URI od animal keeper",
+            "datatype": "anyURI",
+            "propertyUrl":"rdf:type",
+            "valueUrl":"ex:AnimalKeeper",
+            "required": true
+          },
+          
+          {
+            "@type": "Column",
+            "name": "base_uri",
+            "titles": "base_uri",
+            "dc:description": "uri referring to base information about animal keeper",
+            "datatype": "anyURI",
+            "aboutUrl":"{+uri}",
+            "propertyUrl":"ex:base",
+            "valueUrl":"{+base_uri}",
+            "required": true
+          },
+          {
+            "@type": "Column",
+            "name": "education_uri",
+            "titles": "education_uri",
+            "dc:description": "uri referring to education information",
+            "datatype": "anyURI",
+            "aboutUrl":"{+uri}",
+            "propertyUrl":"ex:education",
+            "valueUrl":"{+education_uri}",
+            "required": true
+          },
+          {
+            "@type": "Column",
+            "name": "specialization_uri",
+            "titles": "specialization_uri",
+            "dc:description": "uri referring to specialization information",
+            "datatype": "anyURI",
+            "aboutUrl":"{+uri}",
+            "propertyUrl":"ex:specialization",
+            "valueUrl":"{+specialization_uri}",
+            "required": true
+          }
+        ],
+        "primaryKey": "uri",
+        "foreignKeys": [
+          {
+            "columnReference": "base_uri",
+            "reference": {
+              "resource": "data-2.csv",
+              "columnReference": "uri"
+            }
+          },
+          {
+            "columnReference": "education_uri",
+            "reference": {
+              "resource": "data-3.csv",
+              "columnReference": "uri"
+            }
+          },
+          {
+            "columnReference": "specialization_uri",
+            "reference": {
+              "resource": "data-4.csv",
+              "columnReference": "uri"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "@id": "https://examplezoo.com/data-2.csv-metadata.json",
+      "@type": "Table",
+      "url": "data-2.csv",
+      "tableSchema": {
+        "@type": "Schema",
+        "aboutUrl":"{+uri}",
+        "columns": [
+          {
+            "@type": "Column",
+            "name": "uri",
+            "titles": "uri",
+            "dc:description": "Public employee uri",
+            "datatype": "anyURI",
+            "propertyUrl":"rdf:type",
+            "valueUrl":"ex:Employee",
+            "required": true
+          },
+          {
+            "@type": "Column",
+            "name": "familyName",
+            "titles": "familyName",
+            "propertyUrl": "foaf:familyName",
+            "dc:description": "Family name",
+            "datatype": "string",
+            "lang": "cs",
+            "required": true
+          },
+          {
+            "@type": "Column",
+            "name": "givenName",
+            "titles": "givenName",
+            "propertyUrl": "foaf:givenName",
+            "dc:description": "Given name",
+            "datatype": "string",
+            "lang": "cs",
+            "required": true
+          },
+          {
+            "@type": "Column",
+            "name": "mbox",
+            "titles": "mbox",
+            "propertyUrl": "foaf:mbox",
+            "dc:description": "mailbox",
+            "datatype": "string",
+            "required": true
+          },
+          {
+            "@type": "Column",
+            "name": "workHours",
+            "titles": "workHours",
+            "propertyUrl": "schema:workHours",
+            "dc:description": "Work hours",
+            "datatype": "string",
+            "required": true
+          },
+          {
+            "@type": "Column",
+            "name": "baseSalary",
+            "titles": "baseSalary",
+            "propertyUrl": "schema:baseSalary",
+            "dc:description": "Base salary",
+            "datatype": "number",
+            "required": true
+          },
+          {
+            "@type": "Column",
+            "name": "phone",
+            "titles": "phone",
+            "propertyUrl": "foaf:phone",
+            "dc:description": "Phone number",
+            "datatype": "string",
+            "required": true
+          },
+          {
+            "@type": "Column",
+            "name": "workplace_uri",
+            "titles": "workplace_uri",
+            "dc:description": "uri of the institution",
+            "datatype": "anyURI",
+            "aboutUrl":"{+uri}",
+            "propertyUrl":"schema:worksFor",
+            "valueUrl":"{+workplace_uri}",
+            "required": true
+          }
+        ],
+        "primaryKey": "uri",
+        "foreignKeys": [
+          {
+            "columnReference": "workplace_uri",
+            "reference": {
+              "resource": "data-5.csv",
+              "columnReference": "uri"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "@id": "https://examplezoo.com/data-3.csv-metadata.json",
+      "@type": "Table",
+      "url": "data-3.csv",
+      "tableSchema": {
+        "@type": "Schema",
+        "aboutUrl":"{+uri}",
+        "columns": [
+          {
+            "@type": "Column",
+            "name": "uri",
+            "titles": "uri",
+            "dc:description": "uri of education level",
+            "datatype": "anyURI",
+            "propertyUrl":"rdf:type",
+            "valueUrl":"ex:EducationalLevel",
+            "required": true
+          },
+          {
+            "@type": "Column",
+            "name": "name",
+            "titles": "name",
+            "propertyUrl": "schema:name",
+            "dc:description": "name of the specialization",
+            "datatype": "string",
+            "lang": "en",
+            "required": true
+          }
+        ],
+        "primaryKey": "uri"
+      }
+    },
+    {
+      "@id": "https://examplezoo.com/data-4.csv-metadata.json",
+      "@type": "Table",
+      "url": "data-4.csv",
+      "tableSchema": {
+        "@type": "Schema",
+        "aboutUrl":"{+uri}",
+        "columns": [
+          {
+            "@type": "Column",
+            "name": "uri",
+            "titles": "uri",
+            "dc:description": "Public specialization uri",
+            "datatype": "anyURI",
+            "propertyUrl":"rdf:type",
+            "valueUrl":"ex:Specialization",
+            "required": true
+          },
+          {
+            "@type": "Column",
+            "name": "name",
+            "titles": "name",
+            "propertyUrl": "schema:name",
+            "dc:description": "Specialization name",
+            "datatype": "string",
+            "lang":"cs",
+            "required": true
+          },
+          {
+            "@type": "Column",
+            "name": "accessRights",
+            "titles": "accessRights",
+            "propertyUrl": "dcterms:accessRights",
+            "dc:description": "Access rights",
+            "datatype": "string",
+            "lang":"cs",
+            "required": true
+          },
+          {
+            "@type": "Column",
+            "name": "experienceRequired",
+            "titles": "experienceRequired",
+            "propertyUrl": "schema:experienceRequired",
+            "dc:description": "Required experience",
+            "datatype": "string",
+            "lang":"cs",
+            "required": true
+          }
+        ],
+        "primaryKey": "uri"
+      }
+    },
+    {
+      "@id": "https://examplezoo.com/data-5.csv-metadata.json",
+      "@type": "Table",
+      "url": "data-5.csv",
+      "tableSchema": {
+        "@type": "Schema",
+        "aboutUrl":"{+uri}",
+        "columns": [
+          {
+            "@type": "Column",
+            "name": "uri",
+            "titles": "uri",
+            "dc:description": "Public zoo uri",
+            "datatype": "anyURI",
+            "propertyUrl":"rdf:type",
+            "valueUrl":"ex:Zoo",
+            "required": true
+          },
+          {
+            "@type": "Column",
+            "name": "name",
+            "titles": "name",
+            "propertyUrl": "schema:name",
+            "dc:description": "Name of the ZOO",
+            "datatype": "string",
+            "lang": "cs",
+            "required": true
+          },
+          {
+            "@type": "Column",
+            "name": "address",
+            "titles": "address",
+            "propertyUrl": "schema:address",
+            "dc:description": "Address of the ZOO",
+            "datatype": "string",
+            "lang": "cs",
+            "required": true
+          }
+        ],
+        "primaryKey": "uri"
+      }
+    },
+    {
+      "@id": "https://examplezoo.com/data-6.csv-metadata.json",
+      "@type": "Table",
+      "url": "data-6.csv",
+      "tableSchema": {
+        "@type": "Schema",
+        "aboutUrl":"{+uri}",
+        "columns": [
+          {
+            "@type": "Column",
+            "name": "uri",
+            "titles": "uri",
+            "dc:description": "uri of the enclosure",
+            "datatype": "anyURI",
+            "propertyUrl":"rdf:type",
+            "valueUrl":"ex:Enclosure",
+            "required": true
+          },
+          {
+            "@type": "Column",
+            "name": "name",
+            "titles": "name",
+            "propertyUrl": "schema:name",
+            "dc:description": "name of the enclosure",
+            "datatype": "string",
+            "lang": "cs",
+            "required": true
+          },
+          {
+            "@type": "Column",
+            "name": "area",
+            "titles": "area",
+            "propertyUrl": "ex:area",
+            "dc:description": "area of the enclosure",
+            "datatype": "number",
+            "required": true
+          },
+          {
+            "@type": "Column",
+            "name": "isInterior",
+            "titles": "isInterior",
+            "propertyUrl": "ex:isInterior",
+            "dc:description": "is interior boolean",
+            "datatype": "string",
+            "required": true
+          },
+          {
+            "@type": "Column",
+            "name": "typeOfFence",
+            "titles": "typeOfFence",
+            "propertyUrl": "ex:typeOfFence",
+            "dc:description": "type of fence",
+            "datatype": "string",
+            "lang":"cs",
+            "required": true
+          },
+          {
+            "@type": "Column",
+            "name": "zoo_uri",
+            "titles": "zoo_uri",
+            "dc:description": "uri of the zoo",
+            "datatype": "anyURI",
+            "aboutUrl":"{+uri}",
+            "propertyUrl":"ex:coverage",
+            "valueUrl":"{+zoo_uri}",
+            "required": true
+          },
+          {
+            "@type": "Column",
+            "name": "keeper_uri",
+            "titles": "keeper_uri",
+            "dc:description": "uri of the keeper",
+            "datatype": "anyURI",
+            "aboutUrl":"{+uri}",
+            "propertyUrl":"ex:mantainance ",
+            "valueUrl":"{+keeper_uri}",
+            "required": true
+          }
+        ],
+        "primaryKey": "uri",
+        "foreignKeys": [
+          {
+            "columnReference": "zoo_uri",
+            "reference": {
+              "resource": "data-5.csv",
+              "columnReference": "uri"
+            }
+          },
+          {
+            "columnReference": "keeper_uri",
+            "reference": {
+              "resource": "data-1.csv",
+              "columnReference": "uri"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "@id": "https://examplezoo.com/data-7.csv-metadata.json",
+      "@type": "Table",
+      "url": "data-7.csv",
+      "tableSchema": {
+        "@type": "Schema",
+        "aboutUrl":"{+uri}",
+        "columns": [
+          {
+            "@type": "Column",
+            "name": "uri",
+            "titles": "uri",
+            "dc:description": "uri of the guide",
+            "datatype": "anyURI",
+            "propertyUrl":"rdf:type",
+            "valueUrl":"ex:Guide",
+            "required": true
+          },
+          {
+            "@type": "Column",
+            "name": "nick",
+            "titles": "nick",
+            "propertyUrl": "foaf:nick",
+            "dc:description": "nick of the guide",
+            "datatype": "string",
+            "lang":"cs",
+            "required": true
+          },
+          {
+            "@type": "Column",
+            "name": "ageRange",
+            "titles": "ageRange",
+            "propertyUrl": "ex:ageRange",
+            "dc:description": "age range of visitors",
+            "datatype": "string",
+            "required": true
+          },
+          {
+            "@type": "Column",
+            "name": "ratingValue",
+            "titles": "ratingValue",
+            "propertyUrl": "schema:ratingValue",
+            "dc:description": "rating of the guide",
+            "datatype": "number",
+            "required": true
+          },
+          {
+            "@type": "Column",
+            "name": "base_uri",
+            "titles": "base_uri",
+            "dc:description": "uri referring to base information about animal keeper",
+            "datatype": "anyURI",
+            "aboutUrl":"{+uri}",
+            "propertyUrl":"ex:base",
+            "valueUrl":"{+base_uri}",
+            "required": true
+          },
+          {
+            "@type": "Column",
+            "name": "specialization_uri",
+            "titles": "specialization_uri",
+            "dc:description": "uri of the specialization",
+            "datatype": "anyURI",
+            "aboutUrl":"{+uri}",
+            "propertyUrl":"ex:specialization",
+            "valueUrl":"{+specialization_uri}",
+            "required": true
+          }
+        ],
+        "primaryKey": "uri",
+        "foreignKeys": [
+          {
+            "columnReference": "base_uri",
+            "reference": {
+              "resource": "data-2.csv",
+              "columnReference": "uri"
+            }
+          },
+          {
+            "columnReference": "specialization_uri",
+            "reference": {
+              "resource": "data-4.csv",
+              "columnReference": "uri"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "@id": "https://examplezoo.com/data-8.csv-metadata.json",
+      "@type": "Table",
+      "url": "data-8.csv",
+      "tableSchema": {
+        "@type": "Schema",
+        "aboutUrl":"{+uri}",
+        "columns": [
+          {
+            "@type": "Column",
+            "name": "uri",
+            "titles": "uri",
+            "dc:description": "uri of the route",
+            "datatype": "anyURI",
+            "propertyUrl":"rdf:type",
+            "valueUrl":"ex:Route",
+            "required": true
+          },
+          {
+            "@type": "Column",
+            "name": "name",
+            "titles": "name",
+            "propertyUrl": "schema:name",
+            "dc:description": "name of the route",
+            "datatype": "string",
+            "lang":"cs",
+            "required": true
+          },
+          {
+            "@type": "Column",
+            "name": "duration",
+            "titles": "duration",
+            "propertyUrl": "schema:duration",
+            "dc:description": "duration",
+            "datatype": "number",
+            "required": true
+          },
+          {
+            "@type": "Column",
+            "name": "difficulty",
+            "titles": "difficulty",
+            "propertyUrl": "ex:difficulty",
+            "dc:description": "difficulty of the route",
+            "datatype": "number",
+            "required": true
+          },
+          {
+            "@type": "Column",
+            "name": "maximumAttendeeCapacity",
+            "titles": "maximumAttendeeCapacity",
+            "propertyUrl": "schema:maximumAttendeeCapacity",
+            "dc:description": "maximum visitors on route",
+            "datatype": "number",
+            "required": true
+          }
+        ],
+        "primaryKey": "uri"
+      }
+    },
+    {
+      "@id": "https://examplezoo.com/data-9.csv-metadata.json",
+      "@type": "Table",
+      "url": "data-9.csv",
+      "tableSchema": {
+        "@type": "Schema",
+        "aboutUrl":"{+uri}",
+        "columns": [
+          {
+            "@type": "Column",
+            "name": "uri",
+            "titles": "uri",
+            "dc:description": "uri of the animal family",
+            "datatype": "anyURI",
+            "propertyUrl":"rdf:type",
+            "valueUrl":"ex:AnimalFamily",
+            "required": true
+          },
+          {
+            "@type": "Column",
+            "name": "scientificName",
+            "titles": "scientificName",
+            "propertyUrl": "uniprot:scientificName",
+            "dc:description": "scientific name of the family",
+            "datatype": "string",
+            "lang":"cs",
+            "required": true
+          },
+          {
+            "@type": "Column",
+            "name": "latinName",
+            "titles": "latinName",
+            "propertyUrl": "ex:latinName",
+            "dc:description": "latin name of the family",
+            "datatype": "string",
+            "lang":"la",
+            "required": true
+          },
+          {
+            "@type": "Column",
+            "name": "documentationLink",
+            "titles": "documentationLink",
+            "propertyUrl": "ex:documentationLink",
+            "dc:description": "documentation link",
+            "datatype": "string",
+            "required": true
+          },
+          {
+            "@type": "Column",
+            "name": "enclosure_uri",
+            "titles": "enclosure_uri",
+            "propertyUrl": "ex:habitat",
+            "dc:description": "uri of the enclosure",
+            "datatype": "anyURI",
+            "aboutUrl":"{+uri}",
+            "valueUrl":"{+enclosure_uri}",
+            "required": true
+          }
+        ],
+        "primaryKey": "uri",
+        "foreignKeys": [
+          {
+            "columnReference": "enclosure_uri",
+            "reference": {
+              "resource": "data-6.csv",
+              "columnReference": "uri"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "@id": "https://examplezoo.com/data-10.csv-metadata.json",
+      "@type": "Table",
+      "url": "data-10.csv",
+      "tableSchema": {
+        "@type": "Schema",
+        "aboutUrl":"{+uri}",
+        "columns": [
+          {
+            "@type": "Column",
+            "name": "uri",
+            "titles": "uri",
+            "dc:description": "uri of the animal ",
+            "datatype": "anyURI",
+            "propertyUrl":"rdf:type",
+            "valueUrl":"ex:Animal",
+            "required": true
+          },
+          {
+            "@type": "Column",
+            "name": "name",
+            "titles": "name",
+            "propertyUrl": "schema:name",
+            "dc:description": "name of the animal",
+            "datatype": "string",
+            "lang":"cs",
+            "required": true
+          },
+          {
+            "@type": "Column",
+            "name": "birthDate",
+            "titles": "birthDate",
+            "propertyUrl": "schema:birthDate",
+            "dc:description": "birthdate of the animal",
+            "datatype": "string",
+            "required": true
+          },
+          {
+            "@type": "Column",
+            "name": "family_uri",
+            "titles": "family_uri",
+            "dc:description": "uri of the amnimal family",
+            "datatype": "anyURI",
+            "aboutUrl":"{+uri}",
+            "propertyUrl":"foaf:member",
+            "valueUrl":"{+family_uri}",
+            "required": true
+          }
+        ],
+        "primaryKey": [
+          "uri"
+        ],
+        "foreignKeys": [
+          {
+            "columnReference": "family_uri",
+            "reference": {
+              "resource": "data-9.csv",
+              "columnReference": "uri"
+            }
+          }
+        ]
+      }
+    },{
+      "@id": "https://examplezoo.com/data-11.csv-metadata.json",
+      "@type": "Table",
+      "url": "data-11.csv",
+      "tableSchema": {
+          "@type": "Schema",
+          "columns": [
+              
+              {
+                "@type": "Column",
+                "name": "enclosure_uri",
+                "titles": "enclosure_uri",
+                "valueUrl": "{+enclosure_uri}",
+                "propertyUrl":"ex:enclosureCoverage",
+                "dc:description": "uri of the enclosure",
+                "datatype": "anyURI",
+                "required": true
+              },
+              {
+                "@type": "Column",
+                "name": "route_uri",
+                "titles": "route_uri",
+                "valueUrl": "{+route_uri}",
+                "propertyUrl":"ex:routeCoverage",
+                "dc:description": "uri of the route",
+                "datatype": "anyURI",
+                "required": true
+              }
+              
+          ],
+          
+        "primaryKey": [
+          "enclosure_uri",
+          "route_uri"
+        ],
+        "foreignKeys": [
+          {
+            "columnReference": "enclosure_uri",
+            "reference": {
+              "resource": "data-6.csv",
+              "columnReference": "uri"
+            }
+          },
+          {
+            "columnReference": "route_uri",
+            "reference": {
+              "resource": "data-8.csv",
+              "columnReference": "uri"
+            }
+          }
+        ]
+      }
+  },
+    
+    {
+      "@id": "https://examplezoo.com/data-12.csv-metadata.json",
+      "@type": "Table",
+      "url": "data-12.csv",
+      "tableSchema": {
+        "@type": "Schema",
+        "columns": [
+          {
+            "@type": "Column",
+            "name": "guide_uri",
+            "titles": "guide_uri",
+            "valueUrl": "{+guide_uri}",
+            "dc:description": "uri of the guide",
+            "datatype": "anyURI",
+            "propertyUrl":"ex:guidance",
+            "required": true
+          },
+          {
+            "@type": "Column",
+            "name": "route_uri",
+            "titles": "route_uri",
+            "valueUrl": "{+route_uri}",
+            "propertyUrl":"ex:coverage",
+            "dc:description": "uri of the route",
+            "datatype": "anyURI",
+            "required": true
+          }
+        ],
+        "primaryKey": [
+          "guide_uri",
+          "route_uri"
+        ],
+        "foreignKeys": [
+          {
+            "columnReference": "guide_uri",
+            "reference": {
+              "resource": "data-7.csv",
+              "columnReference": "uri"
+            }
+          },
+          {
+            "columnReference": "route_uri",
+            "reference": {
+              "resource": "data-8.csv",
+              "columnReference": "uri"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "@id": "https://examplezoo.com/data-13.csv-metadata.json",
+      "@type": "Table",
+      "url": "data-13.csv",
+      "tableSchema": {
+        "@type": "Schema",
+        "aboutUrl":"{+uri}",
+        "columns": [
+          {
+            "@type": "Column",
+            "name": "uri",
+            "titles": "uri",
+            "dc:description": "Day uri",
+            "datatype": "anyURI",
+            "propertyUrl":"rdf:type",
+            "valueUrl":"schema:dayOfWeek",
+            "required": true
+          },
+          {
+            "@type": "Column",
+            "name": "opens",
+            "titles": "opens",
+            "propertyUrl": "schema:opens",
+            "dc:description": "opening time",
+            "datatype": "string",
+            "required": true
+          },
+          {
+            "@type": "Column",
+            "name": "closes",
+            "titles": "closes",
+            "propertyUrl": "schema:closes",
+            "dc:description": "Closing time",
+            "datatype": "string",
+            "required": true
+          },
+          
+          {
+            "@type": "Column",
+            "name": "workplace_uri",
+            "titles": "workplace_uri",
+            "dc:description": "uri of the institution",
+            "datatype": "anyURI",
+            "aboutUrl":"{+uri}",
+            "propertyUrl":"schema:worksFor",
+            "valueUrl":"{+workplace_uri}",
+            "required": true
+          }
+        ],
+        "primaryKey": ["uri","opens","closes"],
+        "foreignKeys": [
+          {
+            "columnReference": "workplace_uri",
+            "reference": {
+              "resource": "data-5.csv",
+              "columnReference": "uri"
+            }
+          }
+        ]
+      }
+    }
+          
+  ]
+}
